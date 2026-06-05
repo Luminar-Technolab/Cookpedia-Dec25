@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Header } from "../header/header";
 import { Footer } from "../footer/footer";
+import { ApiService } from '../services/api-service';
 
 @Component({
   selector: 'app-recipes',
@@ -9,5 +10,33 @@ import { Footer } from "../footer/footer";
   styleUrl: './recipes.css',
 })
 export class Recipes {
+
+  api = inject(ApiService)
+  allRecipes:any = signal([])
+  cuisineArray:any = signal([])
+  mealTypeArray:any = signal([])
+
+  ngOnInit(){
+    this.getAllRecipes()
+  }
+
+  getAllRecipes(){
+    this.api.getAllRecipesAPI().subscribe((res)=>{
+      // console.log(res);
+      this.allRecipes.set(res)
+      // console.log(this.allRecipes());
+      const dummyCuisineArray = res.map((item:any)=>item.cuisine)
+      // console.log(dummyCuisineArray);
+      dummyCuisineArray.forEach((cuisine:any)=>{
+        !this.cuisineArray().includes(cuisine) && this.cuisineArray().push(cuisine)
+      })
+      console.log(this.cuisineArray());
+      const dummyMealTypeArray = res.map((item:any)=>item.mealType).flat(Infinity)
+      dummyMealTypeArray.forEach((meal:any)=>{
+        !this.mealTypeArray().includes(meal) && this.mealTypeArray().push(meal)
+      })
+      console.log(this.mealTypeArray());
+    })
+  }
 
 }

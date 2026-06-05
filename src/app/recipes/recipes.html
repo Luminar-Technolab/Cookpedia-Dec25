@@ -4,7 +4,7 @@
         <div class="col-lg-4">
             <h4>Filter</h4>
             <!-- all -->
-            <button class="btn mt-5">All</button>
+            <button (click)="getAllRecipes()" class="btn mt-5">All</button>
             <!-- cuisine -->
             <div>
                 <button class="btn dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -12,7 +12,9 @@
                 </button>
                 <div class="collapse" id="collapseExample">
                     <!-- duplicate cuisine items -->
-                     <button class="btn">cuisine</button>
+                    @for (cuisine of cuisineArray(); track $index) {
+                         <button class="btn">{{cuisine}}</button>
+                    }
                 </div>
             </div>
             <!-- meal type -->
@@ -22,7 +24,9 @@
                 </button>
                 <div class="collapse" id="collapseExample1">
                     <!-- duplicate cuisine items -->
-                     <button class="btn">meal</button>
+                     @for (meal of mealTypeArray(); track $index) {
+                         <button class="btn">{{meal}}</button>
+                    }
                 </div>
             </div>
         </div>
@@ -34,15 +38,17 @@
             <!-- recipes ;list row -->
             <div class="row my-3">
                 <!-- dupliacte with recipe count -->
-                <div class="col-lg-4">
-                    <div class="p-3">
-                    <img class="card-img-top img-fluid" src="https://www.pngall.com/wp-content/uploads/2/Healthy-Meal.png" alt="recipe">
-                    <div class="card-body">
-                        <h5 class="card-title">name</h5>
-                        <p>Cuisine : cuisine</p>
+                @for (recipe of allRecipes(); track $index) {
+                    <div class="col-lg-4">
+                        <div class="p-3">
+                            <img class="card-img-top img-fluid" [src]="recipe.image" alt="recipe">
+                            <div class="card-body">
+                                <h5 class="card-title">{{recipe.name}}</h5>
+                                <p>Cuisine : {{recipe.cuisine}}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                </div>
+                }
             </div>
         </div>
     </div>
