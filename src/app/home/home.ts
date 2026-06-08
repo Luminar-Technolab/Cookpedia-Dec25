@@ -16,5 +16,6 @@ export class Home {
 
   api = inject(ApiService)
   allRecipes$:Observable<any[]> = this.api.getAllRecipesAPI()
+  allFeedbacks$:Observable<any[]> = this.api.getAllApprovedFeedbackAPI()
 
 }

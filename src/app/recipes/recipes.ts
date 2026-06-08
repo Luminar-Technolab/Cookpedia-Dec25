@@ -2,10 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { Header } from "../header/header";
 import { Footer } from "../footer/footer";
 import { ApiService } from '../services/api-service';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../pipes/search-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-recipes',
-  imports: [Header, Footer],
+  imports: [Header, Footer,FormsModule,SearchPipe,NgxPaginationModule],
   templateUrl: './recipes.html',
   styleUrl: './recipes.css',
 })
@@ -15,7 +18,10 @@ export class Recipes {
   allRecipes:any = signal([])
   cuisineArray:any = signal([])
   mealTypeArray:any = signal([])
-
+  dummyAllRecipes:any = []
+  searchKey:string = ""
+  p: number = 1;
+  
   ngOnInit(){
     this.getAllRecipes()
   }
@@ -24,6 +30,7 @@ export class Recipes {
     this.api.getAllRecipesAPI().subscribe((res)=>{
       // console.log(res);
       this.allRecipes.set(res)
+      this.dummyAllRecipes = res
       // console.log(this.allRecipes());
       const dummyCuisineArray = res.map((item:any)=>item.cuisine)
       // console.log(dummyCuisineArray);
@@ -37,6 +44,10 @@ export class Recipes {
       })
       console.log(this.mealTypeArray());
     })
+  }
+
+  filterRecipe(key:string,value:string){
+    this.allRecipes.set(this.dummyAllRecipes.filter((item:any)=>item[key]==value))
   }
 
 }

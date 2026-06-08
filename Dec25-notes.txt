@@ -1195,7 +1195,10 @@
             - Structural Directives : used to change structure of html page by adding/ removing html elements (not used commonly *ngIf, *ngFor etc)
         - Dependency Injection : Angular automatically creates and provides the objects (dependencies) that a class needs, used 'inject' method or constructor method of class
         - routerLink : used to redirect from one page to another without reloading the existing page
-        - Pipes : It used to transform displayed data in another format, pipe symbol | , syntax : data | pipe-name - It transform data according to pipe applied
+        - Pipes : It used to transform displayed data in another format, pipe symbol | , 
+        syntax : data | pipe-name - It transform data according to pipe applied
+            - Predefined Pipes : Date, UpperCase etc...
+            - Customised pipe : command - ng g p pipe-folder-name/pipe-name
         - Services : Used to share common logic between components in angular. 
             - Create angular services : ng g s service-folder-name/service-name
             - Common uses of services : API call, Data shairing between components, Authentication & authorization, Logging, State management

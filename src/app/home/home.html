@@ -66,10 +66,12 @@
         <!-- scroll content -->
         <div class="scroll-text my-5 d-flex">
             <!-- duplicate feedbcaks -->
-             <div class="border p-3 shadow rounded me-2 w-25 text-wrap">
-                <h5>name</h5>
-                <p style="text-align: justify;">message</p>
-             </div>
+             @for (feedback of allFeedbacks$ | async; track $index) {
+                <div class="border p-3 shadow rounded me-2 w-25 text-wrap">
+                    <h5>name</h5>
+                    <p style="text-align: justify;">message</p>
+                </div>
+             }
         </div>
      </section>
 </div>
