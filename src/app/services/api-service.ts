@@ -23,4 +23,8 @@ export class ApiService {
    return this.http.get<any[]>(`${this.server_url}/feedbacks/approve`)
   }
 
+  //http://localhost:3000/register : post request by register component when register btn clicked
+  registerAPI(reqBody:any){
+    return this.http.post(`${this.server_url}/register`,reqBody)
+  }
 }

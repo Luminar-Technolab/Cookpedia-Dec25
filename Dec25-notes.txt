@@ -1267,3 +1267,10 @@
             - create component inside module : ng g c module-folder-name/component-name --no-standalone
         - Lazy Loaded component : Lazy loading allows Angular to load a component, module, or route only when it's needed, reducing the initial bundle size and improving application performance.
             - to set up Lazy Loading Routes : loadComponent for compoenent, loadChildren for module
+        - Forms in Angular
+            - Template Driven Forms : create and manage forms using Angular directives inside the HTML template. To create forms
+                - Import FormsModule
+                - Use ngForm, ngModel directives can be used to access form tag and input tag
+            - Model Driven Forms / Reactive Forms : form structure and validation logic are defined in the TypeScript component class rather than in the HTML template.
+                - Import ReactiveFormsModule
+                - Create a Basic Reactive Form : use FormGroup, FormControl ,FormArray, Validators, FormBuilder class
