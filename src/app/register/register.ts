@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ApiService } from '../services/api-service';
 import { Footer } from '../footer/footer';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,13 +15,36 @@ export class Register {
   api = inject(ApiService)
   registerForm:FormGroup
   formBuilder = inject(FormBuilder)
+  router = inject(Router)
 
   constructor(){
     this.registerForm = this.formBuilder.group({
-      username:[],
-      email:[],
-      password:[]
+      username:['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.pattern('[a-zA-Z0-9 ]*')]]
     })
+  }
+
+  register(){
+    if(this.registerForm.valid){
+      const username = this.registerForm.value.username
+      const email = this.registerForm.value.email
+      const password = this.registerForm.value.password
+      this.api.registerAPI({username,email,password}).subscribe({
+        next:(res:any)=>{
+          alert("Hi User, your registration completed successfully")
+          this.registerForm.reset()
+          this.router.navigateByUrl('/login')
+        },
+        error:(reason:any)=>{
+          alert(reason.error)
+          this.registerForm.reset()
+          this.router.navigateByUrl('/login')
+        }
+      })
+    }else{
+      alert("Invalid form... Please fill the form with valid data")
+    }
   }
   
 }

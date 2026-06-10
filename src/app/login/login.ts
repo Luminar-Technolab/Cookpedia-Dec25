@@ -1,11 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ApiService } from '../services/api-service';
+import { Router } from '@angular/router';
+import { Footer } from '../footer/footer';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  imports: [ReactiveFormsModule,Footer ],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
 
+  api = inject(ApiService)
+  loginForm:FormGroup
+  formBuilder = inject(FormBuilder)
+  router = inject(Router)
+
+  constructor(){
+    this.loginForm = this.formBuilder.group({
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.pattern('[a-zA-Z0-9 ]*')]]
+    })
+  }
+
+  login(){
+     if(this.loginForm.valid){
+      const email = this.loginForm.value.email
+      const password = this.loginForm.value.password
+      this.api.loginAPI({email,password}).subscribe({
+        next:(res:any)=>{
+          sessionStorage.setItem("token",res.token)
+          sessionStorage.setItem("user",JSON.stringify(res.user))
+          alert("Login Successfull... Welcome to Cookpedia!!!")
+          this.loginForm.reset()
+          if(res.user.role=="user"){
+            this.router.navigateByUrl('/')
+          }else{
+          this.router.navigateByUrl('/admin')
+          }
+        },
+        error:(reason:any)=>{
+          alert(reason.error)
+        }
+      })
+    }else{
+      alert("Invalid form... Please fill the form with valid data")
+    }
+  }
 }

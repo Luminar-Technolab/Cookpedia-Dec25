@@ -27,4 +27,9 @@ export class ApiService {
   registerAPI(reqBody:any){
     return this.http.post(`${this.server_url}/register`,reqBody)
   }
+  //http://localhost:3000/login : post request by login component when login btn clicked
+  loginAPI(reqBody:any){
+    return this.http.post(`${this.server_url}/login`,reqBody)
+  }
+  
 }
