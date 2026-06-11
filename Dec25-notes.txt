@@ -1170,6 +1170,8 @@
             - Use rotes.ts file where add route inside the routes array as route object
             - Each route object consist of path, component etc...
             - router-outlet : A directive where Angular displays routed components. use this selector inside app.html page
+            - To access dymanic values associated a component route.
+                - Using ActivateRoute class methods like params etc...
         - Styling 
             - Using style.css file : Global styling
             - Use style file of each component : 

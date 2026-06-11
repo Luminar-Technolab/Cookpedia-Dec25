@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
@@ -31,5 +31,24 @@ export class ApiService {
   loginAPI(reqBody:any){
     return this.http.post(`${this.server_url}/login`,reqBody)
   }
-  
+  //to append token to request header
+  appendToken(){
+    let headers = new HttpHeaders()
+    const token = sessionStorage.getItem("token")
+    if(token){
+      headers = headers.append('Authorization',`Bearer ${token}`)
+    }
+    return {headers}
+  }
+
+  //http://localhost:3000/recipes/6a2246d0830c476f7bea0464 : get request by view recipe component when page open --- authorised request
+  viewRecipeAPI(recipeId:string){
+       return this.http.get<any>(`${this.server_url}/recipes/${recipeId}`,this.appendToken())
+  }
+
+  //http://localhost:3000/recipes-related?cuisine=Pakistani : get request by view compoenent when page loads
+  getRelatedRecipesAPI(cuisine:string){
+      return this.http.get<any[]>(`${this.server_url}/recipes-related?cuisine=${cuisine}`,this.appendToken())
+  }
+
 }
