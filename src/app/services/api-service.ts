@@ -51,4 +51,24 @@ export class ApiService {
       return this.http.get<any[]>(`${this.server_url}/recipes-related?cuisine=${cuisine}`,this.appendToken())
   }
 
+  //http://localhost:3000/recipes/6a2246d0830c476f7bea0465/download : post request by view component when download btn clicked
+  downloadRecipeAPI(recipeId:string,recipe:any){
+      return this.http.post(`${this.server_url}/recipes/${recipeId}/download`,recipe,this.appendToken())
+  }
+
+  //http://localhost:3000/recipes/6a2246d0830c476f7bea0465/save : post request by view recipe compoennet when save recipe btn clicked
+  saveRecipeAPI(recipeId:string,recipe:any){
+      return this.http.post(`${this.server_url}/recipes/${recipeId}/save`,recipe,this.appendToken())
+  }
+
+  //http://localhost:3000/recipes-save : get request by save recipe componenet when page loads
+  getAllSaveRecipesAPI(){
+      return this.http.get<any[]>(`${this.server_url}/recipes-save`,this.appendToken())
+  }
+
+  //http://localhost:3000/recipes-save/6a2b93b453baaa649cbe27d8 : delete request by save recipe compoenent when delete btn clciked
+  removeItemFromSaveRecipesAPI(id:string){
+      return this.http.delete(`${this.server_url}/recipes-save/${id}`,this.appendToken())
+  }
+  
 }
