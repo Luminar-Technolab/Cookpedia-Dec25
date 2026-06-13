@@ -70,5 +70,13 @@ export class ApiService {
   removeItemFromSaveRecipesAPI(id:string){
       return this.http.delete(`${this.server_url}/recipes-save/${id}`,this.appendToken())
   }
+  //http://localhost:3000/user-download : get requsest by profile compoenent when page loads
+  getUserDownloadListAPI(){
+      return this.http.get<any[]>(`${this.server_url}/user-download`,this.appendToken())
+  }
+  //http://localhost:3000/users/6a279db34543ef550fd53749 : put request by profile componenet when picture edit
+  updateUserProfileAPI(userId:string,reqBody:any){
+      return this.http.put(`${this.server_url}/users/${userId}`,reqBody,this.appendToken())
+  }
   
 }
