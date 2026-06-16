@@ -78,5 +78,25 @@ export class ApiService {
   updateUserProfileAPI(userId:string,reqBody:any){
       return this.http.put(`${this.server_url}/users/${userId}`,reqBody,this.appendToken())
   }
+
+  //http://localhost:3000/users : get request by adminUser compoenent when page open
+  getAllUsersListAPI(){
+      return this.http.get<any[]>(`${this.server_url}/users`,this.appendToken())
+  }
+
+  //http://localhost:3000/feedbacks : get request by admin feedback compoenent when page open
+  getAllFeedbackListAPI(){
+      return this.http.get<any[]>(`${this.server_url}/feedbacks`,this.appendToken())
+  }
   
+  //http://localhost:3000/downloads  : get request by admin download compoenent when page open
+  getAllDownloadListAPI(){
+      return this.http.get<any[]>(`${this.server_url}/downloads`,this.appendToken())
+  }
+
+  //http://localhost:3000/feedbacks/6a264da893cb209d5dc91231 : put request by feedback component when approve / reject btn clicked
+  updateFeedbackAPI(id:string,reqBody:any){
+      return this.http.put(`${this.server_url}/feedbacks/${id}`,reqBody,this.appendToken())
+  }
+
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 import { AdminModuleRoutingModule } from './admin-module-routing-module';
 import { Dashboard } from './dashboard/dashboard';
@@ -9,6 +9,8 @@ import { Downloads } from './downloads/downloads';
 import { Feedbacks } from './feedbacks/feedbacks';
 import { ManageRecipe } from './manage-recipe/manage-recipe';
 import { Sidebar } from './sidebar/sidebar';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../pipes/search-pipe';
 
 
 @NgModule({
@@ -23,7 +25,10 @@ import { Sidebar } from './sidebar/sidebar';
   ],
   imports: [
     CommonModule,
-    AdminModuleRoutingModule
+    AdminModuleRoutingModule,
+    AsyncPipe,
+    FormsModule,
+    SearchPipe
   ]
 })
 export class AdminModuleModule { }
