@@ -85,7 +85,7 @@
                      
                     <div class="text-center mt-3">
                         @if(recipeId){
-                            <button class="btn btn-warning fw-bolder text-light">UPDATE RECIPE</button>
+                            <button (click)="editRecipe()" class="btn btn-warning fw-bolder text-light">UPDATE RECIPE</button>
                         }@else{
                             <button (click)="addRecipe()" class="btn btn-success fw-bolder">ADD RECIPE</button>
                         }

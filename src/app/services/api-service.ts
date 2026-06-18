@@ -105,4 +105,15 @@ export class ApiService {
       return this.http.post(`${this.server_url}/recipes`,reqBody,this.appendToken())
   }
 
+  //http://localhost:3000/recipes/6a321698898dd7fa9424044a : put request by manage recipe component when edit btn clicked
+  editRecipeAPI(recipeId:string,reqBody:RecipeModel){
+      return this.http.put(`${this.server_url}/recipes/${recipeId}`,reqBody,this.appendToken())
+  }
+
+  //http://localhost:3000/recipes/6a321698898dd7fa9424044a : delete request by  recipes component when delete btn clicked
+  deleteRecipeAPI(recipeId:string){
+      return this.http.delete(`${this.server_url}/recipes/${recipeId}`,this.appendToken())
+  }
+
+  
 }

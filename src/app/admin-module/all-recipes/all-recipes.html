@@ -29,7 +29,7 @@
                             <td>
                                 <div class="d-flex">
                                     <a routerLink="/admin/recipes/{{recipe._id}}" class="btn text-primary"> <i class="fa-solid fa-edit"></i> </a>
-                                    <button class="btn ms-2 text-danger"> <i class="fa-solid fa-trash"></i> </button>
+                                    <button (click)="deleteRecipe(recipe._id)" class="btn ms-2 text-danger"> <i class="fa-solid fa-trash"></i> </button>
                                 </div>    
                             </td>
                         </tr>

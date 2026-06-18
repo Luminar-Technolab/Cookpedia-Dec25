@@ -11,7 +11,11 @@ import { ManageRecipe } from './manage-recipe/manage-recipe';
 import { Sidebar } from './sidebar/sidebar';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../pipes/search-pipe';
-
+import { MatButtonModule } from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,14 @@ import { SearchPipe } from '../pipes/search-pipe';
     AdminModuleRoutingModule,
     AsyncPipe,
     FormsModule,
-    SearchPipe
+    SearchPipe,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatCardModule,
+    BaseChartDirective
+  ],
+  providers:[
+    provideNativeDateAdapter()
   ]
 })
 export class AdminModuleModule { }
