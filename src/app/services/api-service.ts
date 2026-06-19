@@ -6,7 +6,7 @@ import { RecipeModel } from '../admin-module/models/recipeModel';
   providedIn: 'root',
 })
 export class ApiService {
-  server_url = "http://localhost:3000"
+  server_url = "https://cookpedia-server-dec25.onrender.com"
   http = inject(HttpClient)
 
   //getAllRecipes - home & recipes component
@@ -115,5 +115,23 @@ export class ApiService {
       return this.http.delete(`${this.server_url}/recipes/${recipeId}`,this.appendToken())
   }
 
-  
+  //chart data
+  getChartData(){
+    this.getAllDownloadListAPI().subscribe((downloadList:any)=>{
+        let output:any = {}
+        downloadList.forEach((recipeDetail:any)=>{
+            let cuisine = recipeDetail.cuisine
+            let curCount = recipeDetail.count
+            if(cuisine in output){
+                output[cuisine] += curCount
+            }else{
+                output[cuisine] = curCount
+            }
+        })
+        const cuisineKeys = Object.keys(output)
+        const countData = Object.values(output)
+        localStorage.setItem("label",JSON.stringify(cuisineKeys))
+        localStorage.setItem("data",JSON.stringify(countData))
+    })
+  }
 }

@@ -1276,3 +1276,7 @@
             - Model Driven Forms / Reactive Forms : form structure and validation logic are defined in the TypeScript component class rather than in the HTML template.
                 - Import ReactiveFormsModule
                 - Create a Basic Reactive Form : use FormGroup, FormControl ,FormArray, Validators, FormBuilder class
+        - Route Guards : To protect route angular provide guards
+            - Angular Guards control whether a user can navigate to a route, leave a route, or load a lazy-loaded module.
+            - to create gurad : ng g g guard-foleder-name/guard-name
+            - Angular gives different types of gurad : CanActivate, CanActivateChild, CanDeactivate, CanMatch, CanLoad, Resolve

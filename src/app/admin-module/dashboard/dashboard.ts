@@ -21,7 +21,37 @@ export class Dashboard {
   router = inject(Router)
   sidebarOpen:boolean = true
   barChartOptions:ChartConfiguration<'bar'>['options']={
-    
+    responsive:true,
+    plugins:{
+      legend:{
+        display:false
+      },
+      title:{
+        text:'Ananlysis of Download Recipes Based on its Cuisine',
+        display:true
+      }
+    }
+  }
+  barChartData:ChartConfiguration<'bar'>['data']={
+    labels:['Italian','Indian','Asian','Chinese','Pakistani'],
+    datasets:[{
+      label:'Count',
+      data:[3,4,5,6,9]
+    }]
+  }
+
+  constructor(){
+    if(localStorage.getItem("label") && localStorage.getItem("data")){
+      const labels = JSON.parse(localStorage.getItem("label") || "") 
+      const data = JSON.parse(localStorage.getItem("data") || "")
+      this.barChartData={
+        labels,
+        datasets:[{
+          label:'Count',
+          data
+        }]
+      }
+    }
   }
   
   toggleSidebar(){
